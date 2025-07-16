@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% block head %}
+            <meta charset="UTF-8">
+            <title>{% block title %}Discount Control{% endblock %}</title>
+
+            {% block stylesheets %}
+                <link href="{{ asset('styles/bootstrap5.min.css') }}" rel="stylesheet">
+                <link href="{{ asset('styles/bootstrap4.min.css') }}" rel="stylesheet">
+            {% endblock %}
+
+            {% block javascripts %}
+                {% block importmap %}{{ importmap(['jquery', 'app']) }}{% endblock %}
+            {% endblock %}
+        {% endblock %}
+    </head>
+
+    {% block body %}
+
+    {% endblock %}
+</html>
+
