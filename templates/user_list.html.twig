@@ -1,0 +1,37 @@
+{% extends 'base_template.html.twig' %}
+
+{% block body %}
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="mb-4">Список Пользователей</h1>
+
+        {% if users|length > 0 %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Отчество</th>
+                    <th scope="col">Дата регистрации</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td> <a href="{{ url('discount_view', {userId: user.id}) }}"> {{ user.id }} </a> </td>
+                        <td> <a href="{{ url('discount_view', {userId: user.id}) }}"> {{ user.firstname }} </a> </td>
+                        <td> <a href="{{ url('discount_view', {userId: user.id}) }}"> {{ user.lastname }} </a> </td>
+                        <td> <a href="{{ url('discount_view', {userId: user.id}) }}"> {{ user.patronymic }} </a> </td>
+                        <td> <a href="{{ url('discount_view', {userId: user.id}) }}"> {{ user.createdat|date('Y-m-d H:i:s') }} </a> </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Нет зарегистрированных пользователей.</p>
+        {% endif %}
+    </div>
+</body>
+{% endblock %}
+
