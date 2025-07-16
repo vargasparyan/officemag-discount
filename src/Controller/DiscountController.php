@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Twig\Environment;
 use DateTimeImmutable;
@@ -20,6 +21,11 @@ final class DiscountController extends AbstractController
     #[Route('/view/{userId}', name: 'discount_view')]
     public function view(UserRepository $userRepository, Environment $twig, int $userId): Response
     {
+        // TODO Тут должна быть валидация пользователя
+        // if ($this->getUser()->getId() ===  $userId) {
+        //     throw new AccessDeniedHttpException();
+        // }
+
         $user     = $userRepository->find($userId);
         $discount = $user->getLastDiscount();
         if (null === $discount || $discount->getCreatedAt() < new DateTimeImmutable('-3 hour')) {
@@ -38,6 +44,11 @@ final class DiscountController extends AbstractController
     #[Route('/generate-code/{userId}', name: 'discount_generate_code')]
     public function generateCode(UserDiscountService $userDiscountService, int $userId): JsonResponse
     {
+        // TODO Тут должна быть валидация пользователя
+        // if ($this->getUser()->getId() ===  $userId) {
+        //     throw new AccessDeniedHttpException();
+        // }
+
         return $this->json(
             $userDiscountService->getUserDiscountGeneratedData($userId)
         );
@@ -46,6 +57,11 @@ final class DiscountController extends AbstractController
     #[Route('/check-code/{userId}', name: 'discount_check_code')]
     public function checkCode(UserDiscountService $userDiscountService, int $userId, Request $request): JsonResponse
     {
+        // TODO Тут должна быть валидация пользователя
+        // if ($this->getUser()->getId() ===  $userId) {
+        //     throw new AccessDeniedHttpException();
+        // }
+
         return $this->json(
             $userDiscountService->getUserDiscountCodeCheckingData(
                 $userId,
