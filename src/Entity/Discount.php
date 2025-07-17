@@ -21,7 +21,7 @@ class Discount
 
 
     #[ORM\ManyToOne(targetEntity: User::class,  inversedBy: 'discounts')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
