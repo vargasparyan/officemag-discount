@@ -14,6 +14,8 @@ final class UserController extends AbstractController
     #[Route('/list', name: 'user_list')]
     public function index(UserRepository $userRepository, Environment $twig): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return new Response(
             $twig->render('user_list.html.twig', [
                 'users' => $userRepository->findAll(),

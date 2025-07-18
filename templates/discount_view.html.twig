@@ -2,6 +2,12 @@
 
 {% block body %}
     <div class="container mt-5">
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
         <h3>Проверь скидквоу. userId : {{ user.id }}</h3>
         <h3>ФИО : {{ user.firstName }} {{ user.lastName }} {{ user.patronymic }}</h3>
 
